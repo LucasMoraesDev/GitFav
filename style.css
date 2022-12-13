@@ -1,0 +1,283 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  --ff-primary: "Roboto", sans-serif;
+  --text-color: #ffffff;
+  --text-color-shade: #e1e1e6;
+  --text-color-shader: #c1c1c4;
+
+  --hue: 191;
+  --primary-color: hsl(var(--hue), 31%, 42%);
+  --primary-color-shade: hsl(var(--hue), 91%, 25%);
+  --primary-color-shader: hsl(var(--hue), 72%, 13%);
+  --primary-color-shader2: hsl(var(--hue), 70%, 10%);
+  --primary-color-shadest: hsl(var(--hue), 65%, 7%);
+
+  --secondary-hue: 240;
+  --secondary-color: hsl(var(--secondary-hue), 0%, 3%);
+  --secondary-color-light: hsla(var(--secondary-hue), 6%, 51%, 1);
+}
+
+body {
+  max-height: 100vh;
+
+  font-size: 1.6rem;
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+}
+
+body * {
+  font-family: var(--ff-primary);
+}
+
+.sr-only {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+#app {
+  max-width: calc(1120px + (100px));
+  padding: 0 clamp(0rem, 10vw, 16rem);
+  margin: 11.5rem auto;
+}
+
+/* HEADER */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 4.8rem;
+  margin: 0 0 8rem;
+}
+header > svg {
+  width: 18.628rem;
+  height: 3.275rem;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.search input {
+  color: var(--secondary-color-light);
+  background: var(--primary-color-shadest);
+  height: 4.8rem;
+  width: clamp(32rem, 15vw, 46.2rem);
+  border: none;
+  border-radius: 0.5rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1.6rem;
+  gap: 1rem;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.search button {
+  background-color: var(--primary-color-shade);
+  border-radius: 0.5rem;
+  border: none;
+
+  cursor: pointer;
+  transition: all 0.2s;
+
+  text-transform: uppercase;
+  color: var(--text-color);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem 3.2rem;
+  gap: 0.8rem;
+
+  width: 17rem;
+  height: 4.8rem;
+
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+}
+
+.search button:hover {
+  background: var(--text-color);
+  color: var(--primary-color-shade);
+}
+
+.search button:hover svg path {
+  fill: var(--primary-color-shade);
+}
+
+/* TABLE */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+ 
+}
+
+table * {
+  font-size: 1.4rem;
+  color: var(--text-color-shade);
+
+  
+}
+
+
+table th {
+  background-color: var(--primary-color-shader);
+  text-align: left;
+  font-weight: normal;
+  padding: 1.5rem;
+  padding-left: 3rem;
+  font-weight: 700;
+  font-size: 1.7rem;
+  width: clamp(10rem, 8vw, 21.8rem);
+  
+}
+
+table th:first-child {
+  width: clamp(15rem, 20vw, 50.4rem);
+  
+}
+
+
+table tr {
+  border-radius: 10.2rem;
+  border: 1px solid var(--primary-color);
+  background: #06181c;
+  
+}
+table tr:nth-child(odd) {
+  background: rgba(6, 22, 27, 0.5);
+  
+}
+
+
+
+table tr td {
+  transition: all 0.2s;
+  
+}
+
+table tr:hover td {
+  background: var(--primary-color-shader2);
+}
+
+
+table td {
+  padding: 1.5rem;
+  text-align: left;
+  padding-left: 3rem;
+  
+}
+
+td.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  padding-left: 3rem;
+}
+
+td.user img {
+  width: 5.6rem;
+  height: 5.6rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+td.user a {
+  text-decoration: none;
+  
+}
+
+td.user a p {
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+  font-size: 1.65rem;
+}
+
+td.user span {
+  font-weight: 400;
+  
+}
+
+td .remove {
+  border: none;
+  background: none;
+  color: red;
+
+  cursor: pointer;
+
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  #app {
+    padding: 0 5rem;
+    margin: 11.5rem auto;
+  }
+
+  header {
+    margin: 0 0 4.7rem;
+  }
+  header > svg {
+    position: absolute;
+    top: 5rem;
+    left: 10rem;
+  }
+
+  .search input {
+    width: 90%;
+  }
+}
+
+@media (max-width: 650px) {
+  #app {
+    padding: 0;
+    margin: 11.5rem auto 11.5rem;
+  }
+
+  .search input {
+    width: 24rem;
+  }
+
+  table th {
+    padding: 1.5rem 0.5rem;
+  }
+  table th:first-child {
+    padding: 1.5rem 1.5rem;
+  }
+  table td {
+    padding: 1.5rem 0.5rem;
+  }
+  td.user {
+    padding-left: 1rem;
+  }
+}
