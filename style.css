@@ -18,6 +18,7 @@
   --primary-color-shader: hsl(var(--hue), 72%, 13%);
   --primary-color-shader2: hsl(var(--hue), 70%, 10%);
   --primary-color-shadest: hsl(var(--hue), 65%, 7%);
+  --primary-color-shadest2: hsl(var(--hue), 65%, 4%);
 
   --secondary-hue: 240;
   --secondary-color: hsl(var(--secondary-hue), 0%, 3%);
@@ -48,9 +49,9 @@ body * {
 }
 
 #app {
-  max-width: calc(1120px + (100px));
+  max-width: calc(112rem );
   padding: 0 clamp(0rem, 10vw, 16rem);
-  margin: 11.5rem auto;
+  margin: 6.5rem auto 0;
 }
 
 /* HEADER */
@@ -61,7 +62,7 @@ header {
   justify-content: space-between;
 
   height: 4.8rem;
-  margin: 0 0 8rem;
+  margin: 0 0 6rem;
 }
 header > svg {
   width: 18.628rem;
@@ -131,20 +132,38 @@ header > svg {
 
 /* TABLE */
 
+.table {
+  border: 1px solid #4a808c;
+  max-height: 57rem;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  overflow-y: overlay;
+}
+
 table {
   width: 100%;
-  border-collapse: collapse;
 
- 
+  border-spacing: 0;
+
+  outline: 1px solid var(--primary-color);
+}
+
+.table::-webkit-scrollbar {
+  width: 2.2rem;
+}
+
+.table::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 1rem;
+
+  border: 0.8rem solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
 }
 
 table * {
   font-size: 1.4rem;
   color: var(--text-color-shade);
-
-  
 }
-
 
 table th {
   background-color: var(--primary-color-shader);
@@ -153,45 +172,34 @@ table th {
   padding: 1.5rem;
   padding-left: 3rem;
   font-weight: 700;
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   width: clamp(10rem, 8vw, 21.8rem);
-  
 }
 
 table th:first-child {
   width: clamp(15rem, 20vw, 50.4rem);
-  
 }
 
-
 table tr {
-  border-radius: 10.2rem;
-  border: 1px solid var(--primary-color);
   background: #06181c;
-  
 }
 table tr:nth-child(odd) {
   background: rgba(6, 22, 27, 0.5);
-  
 }
-
-
 
 table tr td {
   transition: all 0.2s;
-  
+  border-top: 1px solid #4a808c;
 }
 
 table tr:hover td {
   background: var(--primary-color-shader2);
 }
 
-
 table td {
   padding: 1.5rem;
   text-align: left;
   padding-left: 3rem;
-  
 }
 
 td.user {
@@ -211,18 +219,16 @@ td.user img {
 
 td.user a {
   text-decoration: none;
-  
 }
 
 td.user a p {
   font-weight: bold;
   margin-bottom: 0.6rem;
-  font-size: 1.65rem;
+  font-size: 1.6rem;
 }
 
 td.user span {
   font-weight: 400;
-  
 }
 
 td .remove {
@@ -238,10 +244,42 @@ td .remove {
   align-items: center;
 }
 
+.empty-state {
+  font-family: var(--ff-secondary);
+  background-color: var(--primary-color-shadest2);
+
+  display: flex;
+}
+
+.no-favs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6rem;
+
+  margin: 16rem auto 23.3rem;
+}
+
+.no-favs svg {
+  width: 13.2rem;
+  height: 12.5rem;
+}
+
+.no-favs h2 {
+  font-size: 4rem;
+  line-height: 2.5rem;
+  color: #4E5455;
+}
+
+.hide {
+  display: none;
+}
+
 @media (max-width: 900px) {
+
   #app {
     padding: 0 5rem;
-    margin: 11.5rem auto;
+    margin: 11.5rem auto 1.5rem;
   }
 
   header {
@@ -253,16 +291,9 @@ td .remove {
     left: 10rem;
   }
 
-  .search input {
-    width: 90%;
-  }
 }
 
-@media (max-width: 650px) {
-  #app {
-    padding: 0;
-    margin: 11.5rem auto 11.5rem;
-  }
+@media (max-width: 700px) {
 
   .search input {
     width: 24rem;
@@ -280,4 +311,19 @@ td .remove {
   td.user {
     padding-left: 1rem;
   }
+}
+
+@media (max-width: 600px) {
+  .search button{
+    width: 10rem;
+  }
+  .search span{
+    display: none;
+  }
+
+  td.user {
+    gap: 0.1rem;
+  }
+
+
 }

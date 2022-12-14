@@ -15,10 +15,11 @@ export class Favorites {
   }
 
   async add(username) {
+    
     try {
-      const userExists = this.entries.find(entry => entry.login === username)
-      if(userExists) {
-        throw new Error("Usuário já cadastrado")
+      const userExists = this.entries.find((entry) => entry.login === username);
+      if (userExists) {
+        throw new Error("Usuário já cadastrado");
       }
 
       const user = await GithubUser.seach(username);
@@ -26,10 +27,11 @@ export class Favorites {
       if (isUndefined) {
         throw new Error("Usuário não encontrado!");
       }
-      const oldEntries = [...this.entries]
+      const oldEntries = [...this.entries];
       this.entries = [user, ...oldEntries];
       this.update();
       this.save();
+      window.document.querySelector(".search input").value = "";
     } catch (error) {
       alert(error.message);
     }
@@ -52,11 +54,18 @@ export class FavoritesView extends Favorites {
     this.tbody = this.root.querySelector("table tbody");
     this.update();
     this.onAdd();
-    // localStorage.clear()
   }
 
   onAdd() {
     const addButton = this.root.querySelector(".search button");
+    window.document.onkeyup = (event) => {
+      if (event.key === "Enter") {
+        const { value } = this.root.querySelector(".search input");
+        this.add(value);
+        
+      }
+    };
+
     addButton.onclick = () => {
       let { value } = this.root.querySelector(".search input");
       this.add(value);
@@ -65,13 +74,13 @@ export class FavoritesView extends Favorites {
   }
 
   update() {
+    this.emptyState();
     this.removeAllTr();
     this.createAllRows();
   }
 
   createAllRows() {
     let allEntries = this.entries || [];
-    console.log(allEntries);
     allEntries.forEach((user) => {
       this.createRow(user);
     });
@@ -80,6 +89,7 @@ export class FavoritesView extends Favorites {
   createRow(user) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
+    
     <td class="user">
       <img
         src="https://github.com/${user.login}.png"
@@ -90,6 +100,7 @@ export class FavoritesView extends Favorites {
         <span>${user.login}</span>
       </a>
     </td>
+
     <td class="repositories">${user.public_repos}</td>
     <td class="followers">${user.followers}</td>
     <td><button class="remove">Remover</button></td>
@@ -108,5 +119,13 @@ export class FavoritesView extends Favorites {
     this.tbody.querySelectorAll("tr").forEach((tr) => {
       tr.remove();
     });
+  }
+
+  emptyState() {
+    if (this.entries.length === 0) {
+      this.root.querySelector(".empty-state").classList.remove("hide");
+    } else {
+      this.root.querySelector(".empty-state").classList.add("hide");
+    }
   }
 }
